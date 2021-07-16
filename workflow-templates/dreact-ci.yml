@@ -1,6 +1,6 @@
 name: DReact CI
 on:
-  pull-request:
+  pull_request:
     branches: [ $default-branch ]
     types: [closed]
 

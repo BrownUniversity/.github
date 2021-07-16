@@ -1,0 +1,8 @@
+{
+  "name": "DReact CI Workflow",
+  "description": "DReact Module CI workflow template",
+  "iconName": "umbrella-solid",
+  "categories": [
+    "JavaScript"
+  ]
+}

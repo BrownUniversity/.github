@@ -40,15 +40,13 @@ jobs:
         id: pull-request
         uses: brownuniversity/create-pull-request@v1.0.15
         with:
-          token: ${{ secrets.API_TOKEN_GITHUB}} # PAT
+          token: ${{ secrets.API_TOKEN_GITHUB }} # PAT
           branch-name: feature/${{ env.APP_SLUG }}
           commit-message: "Update ${{ env.APP_TITLE }} app"
           title: "Update ${{ env.APP_TITLE }} app"
-          description: "Changes from $PR_URL"
+          description: "Changes from ${{ github.event.pull_request.html_url }}"
           draft: true
           directory: "dreact"
-        env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
       - name: Comment on App Pull Request
         uses: actions/github-script@v3
         if: env.pr_url

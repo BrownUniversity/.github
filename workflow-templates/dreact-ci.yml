@@ -8,6 +8,9 @@ jobs:
     name: main
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
+    env: # Update for each app
+      APP_SLUG: app-slug
+      APP_TITLE: App Title
     steps:
       - name: Checkout Source
         uses: actions/checkout@v2
@@ -32,15 +35,15 @@ jobs:
         run: npm run build
         working-directory: main
       - name: Copy App to Module
-        run: cp main/dist/[APP_NAME].js dreact/apps/[APP_NAME].js
+        run: cp main/dist/${{ env.APP_SLUG }}.js dreact/apps/${{ env.APP_SLUG }}.js
       - name: Create Pull Request in Module Repo
         id: pull-request
         uses: brownuniversity/create-pull-request@v1.0.15
         with:
           token: ${{ secrets.API_TOKEN_GITHUB}} # PAT
-          branch-name: feature/[APP_NAME]
-          commit-message: "Update [APP_NAME] app"
-          title: "Update [APP_NAME] app"
+          branch-name: feature/${{ env.APP_SLUG }}
+          commit-message: "Update ${{ env.APP_TITLE }} app"
+          title: "Update ${{ env.APP_TITLE }} app"
           description: "Changes from $PR_URL"
           draft: true
           directory: "dreact"

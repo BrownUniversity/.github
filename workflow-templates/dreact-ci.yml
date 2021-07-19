@@ -9,9 +9,8 @@ jobs:
     name: main
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
-    env: # Update for each app
-      APP_SLUG: app-slug
-      APP_TITLE: App Title
+    env:
+      APP_TITLE: App Title # Update for each app
     steps:
       - name: Checkout Source
         uses: actions/checkout@v2
@@ -34,6 +33,9 @@ jobs:
         working-directory: main
       - name: Build App
         run: npm run build
+        working-directory: main
+      - name: Get App Slug
+        run: echo "APP_SLUG=$(node -p "require('./config.js').APP_NAME")" >> $GITHUB_ENV
         working-directory: main
       - name: Copy App to Module
         run: cp main/dist/${{ env.APP_SLUG }}.js dreact/apps/${{ env.APP_SLUG }}.js

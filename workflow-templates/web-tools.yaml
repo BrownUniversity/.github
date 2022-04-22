@@ -1,6 +1,6 @@
 name: Web Tools
 on:
-  workflow-dispatch
+  workflow_dispatch
 
 jobs:
   main:

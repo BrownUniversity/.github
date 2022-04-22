@@ -1,0 +1,9 @@
+name: Web Tools
+on:
+  workflow-dispatch
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Starting workflow..."
